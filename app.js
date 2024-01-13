@@ -30,7 +30,7 @@ form.addEventListener('submit', async (e) => {
         // update data in the DOM from the API
         temp.textContent = data.days[0].temp + '°C';
         desc.textContent = data.days[0].conditions;
-        wind.textContent = data.days[0].windspeed + ' km/h';
+        wind.textContent = 'windspeed: '+data.days[0].windspeed + ' km/h';
         cityName.textContent = data.resolvedAddress;
         humid.textContent ='humidity: '+ data.days[0].humidity + '%';
         if(disp.id !== 'items'){
