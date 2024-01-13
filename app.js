@@ -32,7 +32,7 @@ form.addEventListener('submit', async (e) => {
         desc.textContent = data.days[0].conditions;
         wind.textContent = data.days[0].windspeed + ' km/h';
         cityName.textContent = data.resolvedAddress;
-        humid.textContent ='humidity: ' + data.days[0].humidity + '%';
+        humid.textContent ='humidity: '+ data.days[0].humidity + '%';
         if(disp.id !== 'items'){
             disp.id = 'items'
         };
