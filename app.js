@@ -33,7 +33,9 @@ form.addEventListener('submit', async (e) => {
         wind.textContent = data.days[0].windspeed + ' km/h';
         cityName.textContent = data.resolvedAddress;
         humid.textContent = data.days[0].humidity + '%';
-        disp.id = 'items'
+        if(disp.id !== 'items'){
+            disp.id = 'items'
+        };
         input.value = '';
         }
 
@@ -48,7 +50,9 @@ form.addEventListener('submit', async (e) => {
 // function to display error message if caught
 
 function errorDisplay(message) {
-    disp.id = 'items'
+    if(disp.id !== 'items'){
+         disp.id = 'items'
+      }
     cityName.textContent = message;
     temp.textContent = '';
     desc.textContent = '';
