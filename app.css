@@ -15,7 +15,7 @@ body{
 }
 
 .time{
-    position: fixed;
+    position: sticky;
     top: 7px;
     right: 19px;
     font-family: Arial, Helvetica, sans-serif;
