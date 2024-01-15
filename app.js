@@ -37,7 +37,7 @@ form.addEventListener('submit', async (e) => {
             
             //time from the API  
             try{
-                const timezone = await fetch(`http://worldtimeapi.org/api/timezone/${data.timezone}`).then(responseT => responseT.json()).then(dataT => dataT.datetime).then(dateT => dateT.split('T')[1].split('.')[0]).then(timeT => timeT.split(':'))
+                const timezone = await fetch(`http://api.timezonedb.com/v2.1/get-time-zone?key=33LL1JYYHQSY&format=json&by=zone&zone=${data.timezone}`).then(responseT => responseT.json()).then(dataT => dataT.formatted.split(' ')[1].split(':'));
                 //adds time to dom
                 time.textContent = 'Local Time: ' + timezone[0].toString().padStart(2,'0')+ ':' + timezone[1].toString().padStart(2,'0');
 
