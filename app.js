@@ -27,36 +27,23 @@ form.addEventListener('submit', async (e) => {
 
             // waits for fetched the data from the API
             const data = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=metric&key=8JGSDFCRK5Y49TKWB37ZNQR2K`).then(response => response.json());
-           
             //time from the API  
-            try{
-           
-                const timezone = await fetch(`https://api.timezonedb.com/v2.1/get-time-zone?key=33LL1JYYHQSY&format=json&by=zone&zone=${data.timezone}`).then(responseT => responseT.json()).then(dataT => dataT.formatted.split(' ')[1].split(':'));
-                //adds time to dom
-                time.textContent = 'Local Time: ' + timezone[0].toString().padStart(2,'0')+ ':' + timezone[1].toString().padStart(2,'0');
-    
-            }
-            catch(err){
-                console.log(err +"you are gaeeeeeeeeee");
-    
-            }
-            
+            const timezone = await fetch(`https://api.timezonedb.com/v2.1/get-time-zone?key=33LL1JYYHQSY&format=json&by=zone&zone=${data.timezone}`).then(responseT => responseT.json()).then(dataT => dataT.formatted.split(' ')[1].split(':'));
+            //adds time to dom
+            time.textContent = 'Local Time: ' + timezone[0].toString().padStart(2,'0')+ ':' + timezone[1].toString().padStart(2,'0');
+                
+            // get the current hour data from the API
+            const currentHour = timezone[0].toString().padStart(2,'0');
+            const currentHourData = data.days[0].hours.filter(hour=>hour.datetime === `${currentHour}:00:00`)[0];
+
             // update data in the DOM from the API
-            temp.textContent = Math.floor(data.days[0].temp) + '°C';
-            desc.textContent = data.days[0].conditions;
-            wind.textContent = 'windspeed: '+ Math.floor(data.days[0].windspeed) + ' km/h';
+            temp.textContent = Math.floor(currentHourData.temp) + '°C';
+            desc.textContent = currentHourData.conditions;
+            wind.textContent = 'windspeed: '+ Math.floor(currentHourData.windspeed) + ' km/h';
             cityName.textContent = data.resolvedAddress;
-            humid.textContent ='humidity: '+ Math.floor(data.days[0].humidity) + '%';
-
+            humid.textContent ='humidity: '+Math.floor(currentHourData.humidity) + '%';
             
-            
-
-
-            if(disp.id !== 'items') {
-
-                disp.id = 'items'
-
-            };
+            if(disp.id !== 'items') disp.id = 'items';
 
             input.value = '';
 
